@@ -29,6 +29,7 @@ const Login = (props) => {
         return
       }
       setError(null)
+      props.history.push('/detalle')
       console.log("todo OK")
 
       if(esRegistro){
@@ -73,10 +74,14 @@ const Login = (props) => {
           email: res.user.email,
           uid: res.user.uid
         })
+        /*Add Collection DB Firebase
+        await db.collection(res.user.uid).add({
+          name:'GBM data',
+          fecha: Date.now()
+        })*/
         setEmail('')
         setPass('')
         setError(null)
-        
 
       } catch(error) {
           console.log(error)
