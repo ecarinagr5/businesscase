@@ -9,4 +9,6 @@
     color:#fff;
     font-weight: 900;
   }
-  
+  .navbar-brand {
+    margin-left: 5%;
+  }

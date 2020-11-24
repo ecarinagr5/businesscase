@@ -46,7 +46,7 @@ const Login = (props) => {
         setEmail('')
         setPass('')
         setError(null)
-        props.history.push('/admin')
+        props.history.push('/detalle')
 
       } catch (error) {
         console.log(error)
@@ -56,6 +56,9 @@ const Login = (props) => {
         }
         if(error.code === 'auth/invalid-email') {
           setError('Email no valido')
+        }
+        if(error.code === 'auth/wrong-password'){
+          setError('Password invalido')
         }
       }
     },[ email, pass, props.history ])

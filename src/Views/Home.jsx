@@ -32,7 +32,7 @@ class Home extends Component {
                 <Title title = { title } subtitle = { subtitle } />
                 <Buttons />
                 <Chart metrics={ metrics } setVisualization={ visualization } />
-                {/*<Card metrics={ metrics }/> */}
+                
             </div>
         </div>
     )

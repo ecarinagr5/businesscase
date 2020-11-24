@@ -1,32 +1,22 @@
+import React from 'react'
+import { auth } from '../firebase'
+import { withRouter } from 'react-router-dom'
 
-import React, { Component } from 'react';
-
-//Components
-import Title from '../Components/Title';
-
-class Admin extends Component {
-
-  constructor(props) {
-    super(props); 
-    this.state = {
-      title: 'Admin',
-      subtitle: 'IPC Indicator'
+const  Admin = (props) => {
+  console.log(props)
+  React.useEffect(() => {
+    if(auth.currentUser) {
+      console.log('Existe user')
+    } else {
+      console.log('No existe')
     }
-  }
+  })
 
-
-  render() {
-    let { title, subtitle } = this.state;
-
-    return (
-        <div>
-            <Title title = { title } subtitle = { subtitle } />
-            Login
-        </div>
-    )
-  }
+  return (
+    <div>
+      BIENVENIDO
+    </div>
+  )
 }
 
-  export default Admin;
-  
-
+export default withRouter (Admin)
