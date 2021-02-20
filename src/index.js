@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 //Redux
 import { Provider } from 'react-redux'
 import generateStore from './Redux/store'
-import { getDataAction } from './Redux/ipcData'
+import { gitDataAction } from './Redux/getDataGit'
 import createHistory  from 'history/createBrowserHistory'; //control de rutas
 import thunk from 'redux-thunk'; // Promise
 import { routerMiddleware } from  'react-router-redux'; // Middleware
@@ -18,7 +18,7 @@ const middleware = [ routerMiddleware(history), thunk ] //Se le esta pasando dos
 //Load Store
 const store = generateStore()
 //Load data initial
-store.dispatch(getDataAction())
+store.dispatch(gitDataAction())
 
 
 

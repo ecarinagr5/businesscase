@@ -21,7 +21,6 @@ function App() {
   
   React.useEffect(() => {
     auth.onAuthStateChanged(user => {
-      console.log(user)
       if(user) {
         setFirebaseUser(user)
       } else {
@@ -36,9 +35,7 @@ function App() {
             <NavBar firebaseUser={firebaseUser} />
             <Switch>
               <Route exact path="/" component={ Home } />
-              <Route exact path="/detalle" component={ Detalle } />
-              <Route exact path="/login" component={ Login } />
-              <Route exact path="/admin" component={ Admin } />
+              <Route exact path="/Repository" component={ Detalle } />
             </Switch>
         </div>
       </Router>

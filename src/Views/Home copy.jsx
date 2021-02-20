@@ -7,29 +7,31 @@ import { bindActionCreators } from 'redux'
 import { getDataAction } from '../Redux/ipcData'
 
 //Components
-import Card from '../Components/Card'
+import Chart from '../Components/Chart';
 import Title from '../Components/Title';
+import Buttons from '../Components/Buttons';
 
 class Home extends Component {
 
   constructor(props) {
     super(props); 
     this.state = {
-      title: 'REPOSITORY SEARCH',
-      subtitle: 'Repository detail in GitHub'
+      title: 'USER SEARCH',
+      subtitle: 'Search user in GitHub'
     }
   }
 
 
   render() {
-    let { metrics } = this.props;
+    const { metrics, visualization, usergit } = this.props;
     let { title, subtitle } = this.state;
-
     return (
         <div>
             <div className="container">
                 <Title title = { title } subtitle = { subtitle } />
-                <Card metrics={ metrics }/>
+                {/*<Buttons />*/}
+                {/*<Chart metrics={ metrics } setVisualization={ visualization } />*/}
+                
             </div>
         </div>
     )
@@ -39,7 +41,8 @@ class Home extends Component {
 function mapStateToProps(state){
     return {
         metrics: state.metrics.array,
-        visualization: state.setVisualization.chart
+        visualization: state.setVisualization.chart,
+        usergit: state.datagit.array
     }
   }
   //Send

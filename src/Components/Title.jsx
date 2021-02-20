@@ -8,7 +8,6 @@ class Title extends Component {
     }
 
     render() {
-        console.log("titles", this.props.subtitle)
         let { title , subtitle } = this.props;
         return (
             <>

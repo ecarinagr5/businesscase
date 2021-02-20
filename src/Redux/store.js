@@ -2,11 +2,13 @@ import { createStore, combineReducers, compose , applyMiddleware } from 'redux'
 import thunk from 'redux-thunk' //promises
 
 import ipcReducer from './ipcData'
+import gitReducer from './getDataGit'
 import setVisualization from './changeVisualization'
 
 const rootReducer  = combineReducers({
     metrics: ipcReducer,
-    setVisualization
+    setVisualization,
+    datagit: gitReducer
 })
 
 //code to setup redux dev tools

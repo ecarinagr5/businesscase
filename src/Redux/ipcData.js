@@ -36,7 +36,7 @@ export const getDataAction = () => async (dispatch) => {
     }
 
     try {
-        const res = await axios.get('https://run.mocky.io/v3/cc4c350b-1f11-42a0-a1aa-f8593eafeb1e')
+        const res = await axios.get('https://api.github.com/search/users?q=ecarinagr5')
         console.log('API Storage')
         dispatch({
             type: GET_DATA_SUCCESSFULL,
