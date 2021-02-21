@@ -8,6 +8,9 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+//Style
+import './style.css';
+
 am4core.useTheme(am4themes_material);
 am4core.useTheme(am4themes_animated);
 am4core.options.autoSetClassName = true;
@@ -31,30 +34,23 @@ class Chart extends React.Component {
 
     renderChart() {
       let { metrics, setVisualization } = this.props;
-
       let dataToGraph = {};
           dataToGraph = new Array();
 
-      Object.values(metrics).map( y => {
-          dataToGraph.push({
-              "date":moment(y.date).format('LTS'),
-              "price":y.price,
+      Object.values(metrics).map( ( y, i )=> {
+            dataToGraph.push({
+                "name":y.name,
+                "size":y.size,
             }) 
       });
 
       let chart = am4core.create("chartdiv", am4charts.XYChart);
       this.chart = chart;
       chart.data = dataToGraph;
-      chart.dateFormatter.dateFormat = "yyyy-MM-dd";
-
 
       // Create axes
       let dateAxis =  chart.xAxes.push(new am4charts.CategoryAxis());
-          dateAxis.dataFields.category = "date";
-          dateAxis.renderer.minGridDistance = 100;
-          dateAxis.renderer.grid.template.location = 0.5;
-          dateAxis.startLocation = 0.5;
-          dateAxis.endLocation = 0.5;
+          dateAxis.dataFields.category = "name";
           dateAxis.skipEmptyPeriods = true;
 
       // Create value axis
@@ -63,8 +59,8 @@ class Chart extends React.Component {
 
       // Create series
       let series = setVisualization === 'Bar' ? chart.series.push(new am4charts.ColumnSeries()) : chart.series.push(new am4charts.LineSeries());
-          series.dataFields.valueY = "price";
-          series.dataFields.categoryX = "date";
+          series.dataFields.valueY = "size";
+          series.dataFields.categoryX = "name";
           series.strokeWidth = 2;
           series.tensionX = 0.77;
 
@@ -73,15 +69,15 @@ class Chart extends React.Component {
       bullet.tooltipText = "{valueY}";
 
       bullet.adapter.add("fill", function(fill, target){
-          if(target.dataItem.valueY < 0){
-              return am4core.color("#FF0000");
-          }
-          return fill;
+        if(target.dataItem.valueY < 0){
+            return am4core.color("#4e73df");
+        }
+        return fill;
       })
       let range = valueAxis.createSeriesRange(series);
       range.value = 0;
       range.endValue = -1000;
-      range.contents.stroke = am4core.color("#FF0000");
+      range.contents.stroke = am4core.color("#4e73df");
       range.contents.fill = range.contents.stroke;
 
       // Add scrollbar
@@ -95,7 +91,25 @@ class Chart extends React.Component {
 
     render() {
         return (  
-              <div id="chartdiv" style={{ width: "100%", height: "500px" }} className="mt-5"></div>
+          <div className="col-xl-8 col-lg-7">
+            <div className="card shadow mb-4">
+                <div
+                    className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 className="m-0 font-weight-bold text-primary">Size Projects </h6>
+                    <div className="dropdown no-arrow">
+                        <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <div className="chart-area">
+                        <div id="chartdiv" style={{ width: "100%", height: "500px" }} className="mt-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         );
     }
 }
